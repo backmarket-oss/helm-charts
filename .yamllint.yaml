@@ -1,0 +1,10 @@
+extends: default
+
+ignore: |
+  charts/*/templates/
+
+rules:
+  document-start: disable
+  line-length: disable
+  indentation:
+    spaces: 2
