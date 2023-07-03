@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  random-ingress-operator:
+  - apiVersion: v2
+    appVersion: v0.1.6
+    created: "2023-07-03T17:59:19.341320924Z"
+    description: A Kubernetes operator to manage randomly named Ingresses with a maximum
+      duration.
+    digest: 40fafaef56b4ba62f3aab45eae4037d0e31be01c1977f86621a6e6f6858e0b19
+    name: random-ingress-operator
+    type: application
+    urls:
+    - https://github.com/backmarket-oss/helm-charts/releases/download/random-ingress-operator-0.1.0/random-ingress-operator-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-07-03T17:59:19.341328024Z"
