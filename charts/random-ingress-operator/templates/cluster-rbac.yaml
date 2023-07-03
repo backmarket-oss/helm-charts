@@ -1,0 +1,80 @@
+{{- if .Values.clusterRole.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "random-ingress-operator.fullname" . }}
+  labels:
+    {{- include "random-ingress-operator.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - networking.backmarket.io
+  resources:
+  - randomingresses
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networking.backmarket.io
+  resources:
+  - randomingresses/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - networking.backmarket.io
+  resources:
+  - randomingresses/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses/status
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "random-ingress-operator.fullname" . }}-metrics-reader
+  labels:
+    {{- include "random-ingress-operator.labels" . | nindent 4 }}
+rules:
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "random-ingress-operator.fullname" . }}
+  labels:
+    {{- include "random-ingress-operator.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "random-ingress-operator.fullname" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "random-ingress-operator.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+{{- end }}
