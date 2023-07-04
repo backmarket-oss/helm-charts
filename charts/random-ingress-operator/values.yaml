@@ -13,6 +13,10 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+controller:
+  args:
+    - "--leader-election"
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
