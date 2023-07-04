@@ -30,7 +30,7 @@ spec:
           command:
           - "/manager"
           args:
-            - "--leader-elect"
+            {{- toYaml .Values.controller.args | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
